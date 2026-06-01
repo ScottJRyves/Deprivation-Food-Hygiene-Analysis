@@ -47,7 +47,7 @@ A left join was used with the FHRS dataset as the main table. This retained the 
 
 The final cleaned dataset contained more than 400,000 rows and 12 fields.
 
-A small anonymised sample is included in this repository:
+A small sample is included in this repository:
 
 [`sample-data/output-sample.csv`](sample-data/output-sample.csv)
 
