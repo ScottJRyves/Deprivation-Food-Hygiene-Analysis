@@ -2,62 +2,71 @@
 
 This project explores whether there is a relationship between area deprivation and food-hygiene ratings across local-authority areas in England.
 
-The project was completed as part of my BSc (Hons) Computing studies at Abertay University. It demonstrates a complete data-analysis workflow using Tableau Prep Builder and Tableau Cloud, from raw data cleaning and dataset joining through to visualisation and interpretation.
+It was completed as part of my BSc (Hons) Computing studies at Abertay University. The project demonstrates a complete data-analysis workflow using Tableau Prep Builder and Tableau Cloud, from cleaning and joining raw datasets through to dashboard creation and interpretation.
 
 ## Project Aim
 
 The aim was to investigate whether food-hygiene standards vary across areas with different levels of deprivation.
 
-The project combines two public datasets:
+The analysis combines two public datasets:
 
 - **Food Hygiene Rating Scheme (FHRS)** data
 - **English Indices of Deprivation 2025** local-authority summaries
 
-The FHRS dataset contains business-level inspection information such as business type, local authority, hygiene rating and structural score.
+The FHRS dataset contains business-level inspection information, including business type, local authority, hygiene rating and structural score.
 
-The deprivation dataset contains local-authority measures including average deprivation score and average deprivation rank.
+The deprivation dataset contains local-authority measures, including average deprivation score and average deprivation rank.
+
+## Data Sources
+
+- [Food Hygiene Rating Scheme open data](https://ratings.food.gov.uk/open-data)
+- [English Indices of Deprivation 2025](https://www.gov.uk/government/collections/english-indices-of-deprivation)
 
 ## Data-Preparation Workflow
 
-The data was processed in Tableau Prep Builder using a repeatable workflow:
+The data was processed using a repeatable Tableau Prep Builder workflow.
 
-1. Load the FHRS CSV file and deprivation spreadsheet
-2. Clean each dataset separately
-3. Remove unnecessary fields
-4. Convert hygiene ratings into a numeric format
-5. Filter records that could not be used in the analysis
-6. Standardise local-authority names
-7. Join the datasets using local-authority information
-8. Rename fields into a clearer format
-9. Export the cleaned dataset for use in Tableau Cloud
+The workflow:
+
+1. Loads the FHRS CSV file and deprivation spreadsheet
+2. Cleans each dataset separately
+3. Removes unnecessary fields
+4. Converts hygiene ratings into a numeric format
+5. Filters unusable records
+6. Standardises local-authority names
+7. Joins both datasets using local-authority information
+8. Renames fields into a clearer format
+9. Exports the cleaned dataset for use in Tableau Cloud
 
 ![Tableau Prep workflow](screenshots/tableau-prep-flow.png)
 
 ## Cleaning and Transformation
 
-The FHRS dataset required more preparation because some records contained text values such as businesses awaiting inspection. These values could not be used when calculating average hygiene ratings and were filtered from the analysis.
+The FHRS dataset required additional preparation because some records contained text values, such as businesses awaiting inspection. These values could not be used when calculating average hygiene ratings and were filtered from the analysis.
 
 Local-authority names also required cleaning because the two datasets did not always use the same naming format. Tableau calculated fields using functions such as `REGEXP_REPLACE` and `REPLACE` were used to remove punctuation and wording such as `City of`.
 
 ![Tableau Prep cleaning stage](screenshots/tableau-prep-cleaning-stage.png)
 
-A left join was used with the FHRS dataset as the main table. This retained the business-level food-hygiene records while attaching deprivation data where local-authority names matched.
+A left join was used with the FHRS dataset as the main table. This retained the food-hygiene records while attaching deprivation data where local-authority names matched.
 
 ## Processed Dataset
 
-The final cleaned dataset contained more than 400,000 rows and 12 fields.
+The final cleaned dataset contained more than **400,000 rows** and **12 fields**.
 
-A small sample is included in this repository:
+A small sample is available in this repository:
 
 [`sample-data/output-sample.csv`](sample-data/output-sample.csv)
 
-The full dataset is not included because it is significantly larger and is not required to demonstrate the analysis workflow.
+The complete output dataset is not included because it is significantly larger and is not required to demonstrate the workflow.
 
-## Dashboard and Visualisations
+## Dashboard Overview
 
 The processed data was analysed in Tableau Cloud using an interactive dashboard with filters for business type and deprivation score.
 
 ![Dashboard overview](screenshots/dashboard-overview.png)
+
+## Visualisations
 
 ### Deprivation and Average Hygiene Rating
 
@@ -69,7 +78,7 @@ Areas with higher deprivation scores often had slightly lower average hygiene ra
 
 ### Areas with Low Hygiene Ratings
 
-The density map highlights clusters of businesses with hygiene ratings between `0` and `2`.
+The density map highlights geographic clusters of businesses with hygiene ratings between `0` and `2`.
 
 ![Low hygiene-rating density map](screenshots/low-hygiene-density-map.png)
 
@@ -81,11 +90,19 @@ Takeaway and sandwich shops had one of the lower average hygiene ratings, while 
 
 ![Business-sector comparison](screenshots/business-sector-comparison.png)
 
+### Breakdown by Business Type
+
+This scatter plot shows how average hygiene ratings vary across deprivation scores when split by business type.
+
+It helps explore whether particular sectors appear to perform differently across local-authority areas.
+
+![Business-type scatter plot](screenshots/business-type-scatterplot.png)
+
 ## Key Findings
 
-- The Tableau Prep workflow successfully produced a cleaned dataset with more than 400,000 rows.
+- The Tableau Prep workflow produced a cleaned dataset with more than 400,000 rows.
 - The results suggest a slight negative relationship between deprivation score and average food-hygiene rating.
-- Geographic clusters of low-rated businesses can be explored using the density map.
+- The density map highlights geographic clusters of businesses with low hygiene ratings.
 - Hygiene ratings vary between business sectors.
 - Deprivation appears to be one relevant factor, but it does not fully explain differences in food-hygiene ratings.
 
@@ -110,7 +127,8 @@ Takeaway and sandwich shops had one of the lower average hygiene ratings, while 
 |---|---|
 | [`report`](report) | Written project report |
 | [`screenshots`](screenshots) | Tableau workflow and dashboard screenshots |
-| [`sample-data`](sample-data) | Small anonymised sample of the cleaned output dataset |
+| [`sample-data`](sample-data) | Small sample of the cleaned output dataset |
+| [`exports`](exports) | Exported project visualisations |
 
 ## Full Report
 
